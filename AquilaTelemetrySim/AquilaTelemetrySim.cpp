@@ -17,10 +17,27 @@ int main()
 
     sensor = { pil,57,(long)time(NULL) }; /// ornek bir deger atadım.
 
+    /// sensor verileri ekrana yazdirildi 
+
     printf("=== Olusturulan Paket ===\n");
     printf("Sensor ID : %d\n", sensor.id);
     printf("Deger     : %.2f\n", sensor.value);
     printf("Zaman     : %ld\n", sensor.timestamp);
+
+    // verileri dosyaya atma
+
+    FILE* fp = fopen("veri.log", "wb"); // dosya açıldı.(wb olduğu için tekrar açıldığında içindekiler silincek)
+    if (fp == NULL)
+    {
+        printf("dosya acilmadi!!!");
+        return 1;
+    }
+    fwrite(&sensor, sizeof(struct SensorPacket), 1, fp);
+
+    fclose(fp);
+
+    printf("\nPaket 'veri.log' dosyasina yazildi.\n");
+
 
     return 0;
 }
