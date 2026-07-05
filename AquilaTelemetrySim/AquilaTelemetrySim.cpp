@@ -21,8 +21,8 @@ int main()
 
     printf("=== Olusturulan Paket ===\n");
     printf("Sensor ID : %d\n", sensor.id);
-    printf("Deger     : %.2f\n", sensor.value);
-    printf("Zaman     : %ld\n", sensor.timestamp);
+    printf("calue     : %.2f\n", sensor.value);
+    printf("time     : %ld\n", sensor.timestamp);
 
     // verileri dosyaya atma
 
@@ -36,8 +36,45 @@ int main()
 
     fclose(fp);
 
-    printf("\nPaket 'veri.log' dosyasina yazildi.\n");
+    printf("\nPaket 'veri.log' dosyasina yazildi.\n\n");
 
+    struct SensorPacket okunan;
+    
+    fp = fopen("veri.log", "rb");
+
+    if (fp == NULL) {
+
+        printf("dosya acilmadi!!!");
+        return 1;
+    }
+
+    fread(&okunan, sizeof(struct SensorPacket), 1, fp);
+
+    printf("=== Okunan Paket ===\n");
+
+    switch (okunan.id)
+    {
+        case derinlik:
+            printf("sensor: derinlik (ID:%d)\n",derinlik);
+            printf("value:%f\n",okunan.value);
+            printf("time: %ld\n",okunan.timestamp);
+            break;
+        case pil:
+            printf("sensor: pil (ID:%d)\n",pil);
+            printf("value:%f\n", okunan.value);
+            printf("time: %ld\n", okunan.timestamp);
+            break;
+        case GPS:
+            printf("sensor: GPS (ID:%d)\n",GPS);
+            printf("value:%.2f\n", okunan.value);
+            printf("time: %ld\n", okunan.timestamp);
+            break;
+        default:
+            printf("hatalı sensor");
+            break;
+    }
+
+    fclose(fp);
 
     return 0;
 }
