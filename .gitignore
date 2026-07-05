@@ -1,0 +1,14 @@
+.vs/
+x64/
+Debug/
+Release/
+*.vsidx
+*.ipch
+*.sdf
+*.opensdf
+*.suo
+*.user
+*.db
+*.db-shm
+*.db-wal
+*.opendb
