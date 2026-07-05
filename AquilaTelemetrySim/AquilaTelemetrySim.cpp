@@ -2,18 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-enum Sensor{derinlik,batarya,GPS};
+enum Sensor{derinlik,pil,GPS};
 
 struct SensorPacket {
-    int id;  // 0 = derinlik, 1 = batarya, 2 = GPS
+    int id;  // 0 = derinlik, 1 = pil, 2 = GPS
     float value; // olculen deger
     long timestamp; // degerin olculdugu zaman
+
 };
-
-
 
 int main()
 {
+    struct SensorPacket sensor;
+
+    sensor = { pil,57,(long)time(NULL) }; /// ornek bir deger atadım.
+
+    printf("=== Olusturulan Paket ===\n");
+    printf("Sensor ID : %d\n", sensor.id);
+    printf("Deger     : %.2f\n", sensor.value);
+    printf("Zaman     : %ld\n", sensor.timestamp);
+
     return 0;
 }
 
